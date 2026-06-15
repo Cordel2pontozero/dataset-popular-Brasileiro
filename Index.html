@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dataset Popular Brasileiro | Cordel 2.0</title>
+
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f1ec;
+        margin: 0;
+        padding: 20px;
+        color: #222;
+      }
+
+      .container {
+        max-width: 620px;
+        margin: 28px auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 14px;
+        box-shadow: 0 4px 22px rgba(0,0,0,0.10);
+        border-top: 6px solid #f36c21;
+      }
+
+      .logo-wrap {
+        text-align: center;
+        margin-bottom: 14px;
+      }
+
+      .logo-wrap img {
+        max-width: 190px;
+        height: auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: #111;
+        margin-bottom: 6px;
+        font-size: 25px;
+      }
+
+      .sub {
+        text-align: center;
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 18px;
+      }
+
+      .impact-message {
+        background: #fff4eb;
+        border-left: 4px solid #f36c21;
+        padding: 13px 14px;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 1.45;
+        color: #333;
+        margin-bottom: 22px;
+      }
+
+      .opensource {
+        display: inline-block;
+        margin-top: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #111;
+        background: #f5d2bd;
+        padding: 5px 9px;
+        border-radius: 999px;
+      }
+
+      .form-group {
+        margin-bottom: 18px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+      }
+
+      input[type="text"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d7d7d7;
+        border-radius: 7px;
+        box-sizing: border-box;
+        font-size: 15px;
+        background: #fff;
+      }
+
+      input[type="text"]:focus,
+      textarea:focus,
+      select:focus {
+        border-color: #f36c21;
+        outline: none;
+      }
+
+      textarea {
+        resize: vertical;
+        height: 88px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      button {
+        width: 100%;
+        background-color: #f36c21;
+        color: white;
+        padding: 14px;
+        border: none;
+        border-radius: 7px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #d85b17;
+      }
+
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      #msg {
+        margin-top: 20px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 15px;
+        padding: 12px;
+        border-radius: 7px;
+        line-height: 1.4;
+      }
+
+      .sucesso {
+        background-color: #e6f4ea;
+        color: #137333;
+        border: 1px solid #c2e7cd;
+      }
+
+      .erro {
+        background-color: #fce8e6;
+        color: #c5221f;
+        border: 1px solid #f9dedc;
+      }
+
+      .aviso {
+        background-color: #fef7e0;
+        color: #9a5600;
+        border: 1px solid #ffe0b2;
+      }
+
+      .footer {
+        margin-top: 24px;
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 0;
+          background-color: #ffffff;
+        }
+
+        .container {
+          margin: 0;
+          border-radius: 0;
+          box-shadow: none;
+          min-height: 100vh;
+          padding: 22px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="logo-wrap">
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/679647ea404fcd2e5824402c/18e46fe3-684b-463d-9f3c-b1f9230dbc44/LOGOMARCA-CORDEL+2.0+Inova+Simples.png?format=300w"
+          alt="Cordel 2.0 Inova Simples">
+      </div>
+
+      <h1>Dataset Popular Brasileiro</h1>
+      <p class="sub">Contribuição colaborativa e anônima.</p>
+
+      <div class="impact-message">
+        Cada palavra compartilhada ajuda a preservar modos de dizer do Brasil
+        e inspira novas gerações de escritores. Este dataset integra o
+        ecossistema Cordel 2.0 e será disponibilizado como código aberto para
+        pesquisa, criação literária e letramento em IA.
+        <br>
+        <span class="opensource">Dataset aberto • Cordel 2.0</span>
+      </div>
+
+      <form id="meuFormulario" onsubmit="enviarFormulario(event)">
+        <div class="form-group">
+          <label for="palavras">Palavra ou expressão *</label>
+          <input type="text" id="palavras" required placeholder="Ex: arretado, prosear, cafundó...">
+        </div>
+
+        <div class="form-group">
+          <label for="sinonimo">Sinônimo</label>
+          <input type="text" id="sinonimo" placeholder="Ex: equivalente, forma aproximada...">
+        </div>
+
+        <div class="form-group">
+          <label for="significado">Breve definição — até 5 palavras-chave *</label>
+          <textarea id="significado" required placeholder="Ex: lugar muito distante"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="referencia">Fonte ou referência</label>
+          <input type="text" id="referencia" placeholder="Ex: memória oral, livro, página, link, localidade...">
+        </div>
+
+        <div class="form-group">
+          <label for="categoria">Categoria *</label>
+          <select id="categoria" onchange="verificarCategoria(this)" required>
+            <option value="">Selecione uma categoria...</option>
+            <option value="Nordeste">Nordeste</option>
+            <option value="Bahia">Bahia</option>
+            <option value="Salvador">Salvador</option>
+            <option value="Recôncavo Baiano">Recôncavo Baiano</option>
+            <option value="Sertão">Sertão</option>
+            <option value="Literatura Popular">Literatura Popular</option>
+            <option value="Caipira">Caipira</option>
+            <option value="Machado de Assis">Machado de Assis</option>
+            <option value="Jorge Amado">Jorge Amado</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+
+        <div class="form-group hidden" id="grupoOutro">
+          <label for="categoriaOutro">Se outro, qual? *</label>
+          <input type="text" id="categoriaOutro" placeholder="Especifique a outra categoria">
+        </div>
+
+        <button type="submit" id="btnEnviar">Contribuir com o dataset</button>
+      </form>
+
+      <div id="msg" class="hidden"></div>
+
+      <div class="footer">
+        Cordel 2.0 Inova Simples | Inovação – Criação – Letramento em IA
+      </div>
+    </div>
+
+    <script>
+      const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbz_OttAGFOY61RwjWSl09YYY33ZMztZQIe3dv2fhQ4PaGQdhbVQa0oYMY0rP7EZxoax/exec';
+
+      function verificarCategoria(select) {
+        const grupoOutro = document.getElementById('grupoOutro');
+        const inputOutro = document.getElementById('categoriaOutro');
+
+        if (select.value === 'Outro') {
+          grupoOutro.classList.remove('hidden');
+          inputOutro.setAttribute('required', 'required');
+        } else {
+          grupoOutro.classList.add('hidden');
+          inputOutro.removeAttribute('required');
+          inputOutro.value = '';
+        }
+      }
+
+      function mostrarMensagem(tipo, texto) {
+        const msg = document.getElementById('msg');
+
+        msg.classList.remove('hidden');
+        msg.className = tipo;
+        msg.innerText = texto;
+      }
+
+      function contarPalavrasChave(texto) {
+        if (!texto) return 0;
+
+        return texto
+          .trim()
+          .split(/[,\s;]+/)
+          .filter(item => item.trim() !== '')
+          .length;
+      }
+
+      function enviarFormulario(e) {
+        e.preventDefault();
+
+        const btn = document.getElementById('btnEnviar');
+        const form = document.getElementById('meuFormulario');
+
+        const palavras = document.getElementById('palavras').value.trim();
+        const sinonimo = document.getElementById('sinonimo').value.trim();
+        const significado = document.getElementById('significado').value.trim();
+        const referencia = document.getElementById('referencia').value.trim();
+        const categoria = document.getElementById('categoria').value;
+        const categoriaOutro = document.getElementById('categoriaOutro').value.trim();
+
+        if (contarPalavrasChave(significado) > 5) {
+          mostrarMensagem('erro', 'A breve definição deve ter no máximo 5 palavras-chave.');
+          return;
+        }
+
+        btn.disabled = true;
+        btn.innerText = 'Enviando...';
+
+        const callbackName = 'cordelCallback_' + Date.now();
+
+        window[callbackName] = function(resposta) {
+          btn.disabled = false;
+          btn.innerText = 'Contribuir com o dataset';
+
+          if (resposta.status === 'sucesso') {
+            mostrarMensagem('sucesso', resposta.mensagem);
+            form.reset();
+            document.getElementById('grupoOutro').classList.add('hidden');
+
+          } else if (resposta.status === 'duplicado') {
+            mostrarMensagem('aviso', resposta.mensagem);
+
+          } else {
+            mostrarMensagem('erro', 'Erro ao salvar: ' + resposta.mensagem);
+          }
+
+          delete window[callbackName];
+
+          const script = document.getElementById(callbackName);
+          if (script) script.remove();
+        };
+
+        const params = new URLSearchParams({
+          api: 'salvar',
+          callback: callbackName,
+          palavras: palavras,
+          sinonimo: sinonimo,
+          significado: significado,
+          referencia: referencia,
+          categoria: categoria,
+          categoriaOutro: categoriaOutro
+        });
+
+        const script = document.createElement('script');
+        script.id = callbackName;
+        script.src = BACKEND_URL + '?' + params.toString();
+
+        script.onerror = function() {
+          btn.disabled = false;
+          btn.innerText = 'Contribuir com o dataset';
+          mostrarMensagem('erro', 'Erro de conexão com o servidor de dados.');
+          delete window[callbackName];
+          script.remove();
+        };
+
+        document.body.appendChild(script);
+      }
+    </script>
+  </body>
+</html>
