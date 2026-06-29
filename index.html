@@ -110,6 +110,45 @@ button {
   color: #777;
 }
 
+/* Visibilidade utilitária (mostrar/ocultar campos e mensagens) */
+.hidden {
+  display: none !important;
+}
+
+/* Caixa de mensagem de retorno do servidor */
+#msg {
+  max-width: 1100px;
+  margin: 18px auto 0 auto;
+  padding: 14px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+#msg.sucesso {
+  background: #e8f5e9;
+  border-left: 4px solid #2e7d32;
+  color: #1b5e20;
+}
+
+#msg.duplicado {
+  background: #fff4eb;
+  border-left: 4px solid #f36c21;
+  color: #7a3b12;
+}
+
+#msg.aviso {
+  background: #fff8e1;
+  border-left: 4px solid #f9a825;
+  color: #7a5b00;
+}
+
+#msg.erro {
+  background: #fdecea;
+  border-left: 4px solid #c62828;
+  color: #8e1b16;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 22px 16px;
@@ -167,7 +206,7 @@ button {
 
         <div class="form-group">
           <label for="referencia">Fonte ou referência</label>
-          <input type="text" id="referencia" placeholder="Ex: memória oral, livro, página, link, localidade...">
+          <input type="text" id="referencia" maxlength="600" placeholder="Ex: memória oral, livro, página, link, localidade...">
         </div>
 
         <div class="form-group">
@@ -222,9 +261,9 @@ button {
       function mostrarMensagem(tipo, texto) {
         const msg = document.getElementById('msg');
 
-        msg.classList.remove('hidden');
         msg.className = tipo;
         msg.innerText = texto;
+        msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
 
       function contarPalavrasChave(texto) {
@@ -259,10 +298,23 @@ button {
         btn.innerText = 'Enviando...';
 
         const callbackName = 'cordelCallback_' + Date.now();
+        const TIMEOUT_MS = 15000;
+        let timeoutId = null;
 
-        window[callbackName] = function(resposta) {
+        function restaurarBotao() {
           btn.disabled = false;
           btn.innerText = 'Contribuir com o dataset';
+        }
+
+        function limparEnvio() {
+          if (timeoutId) clearTimeout(timeoutId);
+          delete window[callbackName];
+          const s = document.getElementById(callbackName);
+          if (s) s.remove();
+        }
+
+        window[callbackName] = function(resposta) {
+          restaurarBotao();
 
           if (resposta.status === 'sucesso') {
             mostrarMensagem('sucesso', resposta.mensagem);
@@ -270,16 +322,17 @@ button {
             document.getElementById('grupoOutro').classList.add('hidden');
 
           } else if (resposta.status === 'duplicado') {
-            mostrarMensagem('aviso', resposta.mensagem);
+            // A palavra foi salva mesmo assim (marcada para conferência).
+            // Por isso também limpamos o formulário, como num envio normal.
+            mostrarMensagem('duplicado', resposta.mensagem);
+            form.reset();
+            document.getElementById('grupoOutro').classList.add('hidden');
 
           } else {
             mostrarMensagem('erro', 'Erro ao salvar: ' + resposta.mensagem);
           }
 
-          delete window[callbackName];
-
-          const script = document.getElementById(callbackName);
-          if (script) script.remove();
+          limparEnvio();
         };
 
         const params = new URLSearchParams({
@@ -293,17 +346,37 @@ button {
           categoriaOutro: categoriaOutro
         });
 
+        const fullUrl = BACKEND_URL + '?' + params.toString();
+
+        // O envio é um GET (JSONP). Se a URL ficar longa demais (ex.: referência
+        // com link gigante), o servidor pode falhar e a contribuição se perderia
+        // silenciosamente. Avisamos de forma clara em vez de tentar e falhar.
+        if (fullUrl.length > 1800) {
+          restaurarBotao();
+          mostrarMensagem('erro', 'Sua contribuição ficou muito longa para enviar. Encurte a "Fonte ou referência" (ex.: use um link mais curto) e tente novamente.');
+          return;
+        }
+
         const script = document.createElement('script');
         script.id = callbackName;
-        script.src = BACKEND_URL + '?' + params.toString();
+        script.src = fullUrl;
 
         script.onerror = function() {
-          btn.disabled = false;
-          btn.innerText = 'Contribuir com o dataset';
+          restaurarBotao();
           mostrarMensagem('erro', 'Erro de conexão com o servidor de dados.');
-          delete window[callbackName];
-          script.remove();
+          limparEnvio();
         };
+
+        // Watchdog: se o servidor devolver um HTML (ex.: tela de autorização
+        // logo após um novo deploy) o <script> CARREGA mas nunca chama o callback
+        // nem dispara onerror — sem isto o botão ficaria preso em "Enviando..."
+        // para sempre. O timeout devolve o controle ao usuário.
+        timeoutId = setTimeout(function() {
+          if (!window[callbackName]) return; // o callback já respondeu
+          restaurarBotao();
+          mostrarMensagem('aviso', 'O servidor demorou a responder. Verifique sua conexão e tente novamente — se persistir, o formulário pode estar em manutenção.');
+          limparEnvio();
+        }, TIMEOUT_MS);
 
         document.body.appendChild(script);
       }
