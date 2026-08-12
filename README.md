@@ -103,7 +103,7 @@ o registro seja publicado sob a mesma licença aberta.
 
 <div align="center">
 
-**Cordel 2.0 Inova Simples (I.S.)**
+**Cordel 2.0 - Educação, Cultura e Inovação**
 Formação em letramento digital com softwares próprios
 Salvador — Bahia — Brasil
 
