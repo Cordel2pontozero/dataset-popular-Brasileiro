@@ -19,7 +19,7 @@
 ## O que é
 
 Um dataset aberto e colaborativo de **palavras, expressões, sinônimos, definições breves e
-referências da cultura popular brasileira** — o vocabulário que circula na feira, no
+referências da cultura popular brasileira** - o vocabulário que circula na feira, no
 terreiro, na quadra, no cordel e na conversa de esquina, e que costuma faltar nos corpora
 com que os sistemas de linguagem são treinados.
 
@@ -30,8 +30,8 @@ recebe contribuições de qualquer pessoa.
 ## O problema que ele endereça
 
 Modelos de linguagem aprendem a partir do que foi escrito e digitalizado. Boa parte da
-língua brasileira viva — regionalismos, gírias de território, vocabulário de matriz
-africana e indígena, expressões de cultura popular — está sub-representada nesses acervos.
+língua brasileira viva - regionalismos, gírias de território, vocabulário de matriz
+africana e indígena, expressões de cultura popular - está sub-representada nesses acervos.
 
 O efeito prático é conhecido de quem dá oficina: a máquina sugere a palavra do centro e
 desconhece a palavra da periferia. Ela empobrece o texto exatamente onde ele seria mais
@@ -42,13 +42,13 @@ técnica**.
 
 ## Por que este é aberto
 
-A Cordel 2.0 desenvolve **softwares próprios** — ARARA, INANNA, TICA, Registro Coletivo.
+A Cordel 2.0 desenvolve **softwares próprios** - ARARA, INANNA, TICA, Registro Coletivo.
 Este repositório é diferente de propósito, e a diferença é deliberada:
 
 > **O software é nosso. A língua não é.**
 
 O vocabulário popular brasileiro não pertence a uma empresa. Ele pertence a quem o fala.
-Fechá-lo seria contradizer a razão de existir do projeto — por isso o dataset é publicado
+Fechá-lo seria contradizer a razão de existir do projeto - por isso o dataset é publicado
 sob **licença MIT**, livre para pesquisa, ensino, jornalismo e desenvolvimento, inclusive
 por terceiros.
 
@@ -63,7 +63,7 @@ Quem contribui está ajudando a construir um bem comum, não um ativo privado.
 | [**TICA**](https://github.com/Cordel2pontozero/tica-apresentacao-oficial) | Melhora o reconhecimento de imagens e expressões trazidas na conversa. |
 | **Oficinas** | Vira material didático: a turma vê a própria língua entrando num dataset. |
 
-Nas oficinas de letramento digital, contribuir com o dataset é uma atividade em si —
+Nas oficinas de letramento digital, contribuir com o dataset é uma atividade em si -
 a pessoa entende o que é um corpus **colocando a palavra da sua rua dentro de um**.
 
 ## Como contribuir
@@ -94,7 +94,7 @@ abstrata.
 
 ## Licenciamento
 
-Conteúdo e código deste repositório: **Licença MIT** — ver [LICENSE](LICENSE).
+Conteúdo e código deste repositório: **Licença MIT** - ver [LICENSE](LICENSE).
 
 Cada contribuição permanece atribuível a quem a enviou. Ao contribuir, você concorda que
 o registro seja publicado sob a mesma licença aberta.
@@ -105,7 +105,7 @@ o registro seja publicado sob a mesma licença aberta.
 
 **Cordel 2.0 - Educação, Cultura e Inovação**
 Formação em letramento digital com softwares próprios
-Salvador — Bahia — Brasil
+Salvador - Bahia - Brasil
 
 [www.cordel2pontozero.com](https://www.cordel2pontozero.com) · [contato@cordel2pontozero.com](mailto:contato@cordel2pontozero.com)
 

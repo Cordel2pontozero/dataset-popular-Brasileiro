@@ -200,7 +200,7 @@ button {
         </div>
 
         <div class="form-group">
-          <label for="significado">Breve definição — até 5 palavras-chave *</label>
+          <label for="significado">Breve definição - até 5 palavras-chave *</label>
           <textarea id="significado" required placeholder="Ex: lugar muito distante"></textarea>
         </div>
 
@@ -237,7 +237,7 @@ button {
       <div id="msg" class="hidden"></div>
 
       <div class="footer">
-        Cordel 2.0 - Educação, Cultura e Inovação | Inovação – Criação – Letramento em IA
+        Cordel 2.0 - Educação, Cultura e Inovação | Inovação - Criação - Letramento em IA
       </div>
     </div>
 
@@ -369,12 +369,12 @@ button {
 
         // Watchdog: se o servidor devolver um HTML (ex.: tela de autorização
         // logo após um novo deploy) o <script> CARREGA mas nunca chama o callback
-        // nem dispara onerror — sem isto o botão ficaria preso em "Enviando..."
+        // nem dispara onerror - sem isto o botão ficaria preso em "Enviando..."
         // para sempre. O timeout devolve o controle ao usuário.
         timeoutId = setTimeout(function() {
           if (!window[callbackName]) return; // o callback já respondeu
           restaurarBotao();
-          mostrarMensagem('aviso', 'O servidor demorou a responder. Verifique sua conexão e tente novamente — se persistir, o formulário pode estar em manutenção.');
+          mostrarMensagem('aviso', 'O servidor demorou a responder. Verifique sua conexão e tente novamente - se persistir, o formulário pode estar em manutenção.');
           limparEnvio();
         }, TIMEOUT_MS);
 
